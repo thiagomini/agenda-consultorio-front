@@ -1,0 +1,16 @@
+<form [formGroup]="service.form" class="normal-form">
+    <div class="controles-container">
+        <input type="hidden" formControlName="$key">
+        <mat-form-field>
+            <input formControlName="nome" matInput placeholder="Nome do Paciente*">
+            <mat-error>Esse campo é obrigatório.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="dataNascimento" matInput [matDatepicker]="picker" placeholder="Data de Nascimento">
+            <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
+            <mat-error>Esse campo é obrigatório.</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Adicionar</button>
+    </div>
+</form>

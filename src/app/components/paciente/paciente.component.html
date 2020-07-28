@@ -1,4 +1,4 @@
-<mat-table [dataSource]="pacientes">
+<table mat-table [dataSource]="pacientes">
     <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef> Nome </th>
         <td mat-cell *matCellDef="let paciente">{{ paciente.nome }}</td>
@@ -8,7 +8,24 @@
         <td mat-cell *matCellDef="let paciente">{{ paciente.dataNascimento }}</td>
     </ng-container>  
 
-    <mat-header-row mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let paciente"
+        (click)="botaoEditarClicado(paciente)"
+        ><button mat-icon-button><mat-icon arial-label="Example">create</mat-icon></button></td>
+    </ng-container>  
 
-    <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
-</mat-table>
+    <ng-container matColumnDef="excluir">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let paciente"
+            (click)="botaoExcluirClicado(paciente)"
+        ><button mat-icon-button><mat-icon arial-label="Example">delete</mat-icon></button></td>
+    </ng-container> 
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"
+        (click)="onRowClicked(myRowData)"    
+    ></tr>
+</table>
+<app-add-paciente></app-add-paciente>

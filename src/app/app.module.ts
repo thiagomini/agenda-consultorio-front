@@ -1,26 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PacienteComponent } from './components/paciente/paciente.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { AddPacienteComponent } from './components/add-paciente/add-paciente.component';
+import { PacienteService } from './services/paciente.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     PacienteComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddPacienteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [PacienteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
