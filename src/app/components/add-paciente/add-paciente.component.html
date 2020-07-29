@@ -1,12 +1,12 @@
-<form [formGroup]="service.form" class="normal-form">
+<form [formGroup]="service.form" class="normal-form" (ngSubmit)="onSubmit()">
     <div class="controles-container">
         <input type="hidden" formControlName="$key">
         <mat-form-field>
-            <input formControlName="nome" matInput placeholder="Nome do Paciente*">
+            <input formControlName="nome" matInput placeholder="Nome do Paciente*" [(ngModel)]="nome">
             <mat-error>Esse campo é obrigatório.</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input formControlName="dataNascimento" matInput [matDatepicker]="picker" placeholder="Data de Nascimento">
+            <input formControlName="dataNascimento" matInput [matDatepicker]="picker" placeholder="Data de Nascimento" [(ngModel)]="dataNascimento">
             <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
             <mat-datepicker #picker ></mat-datepicker>
             <mat-error>Esse campo é obrigatório.</mat-error>

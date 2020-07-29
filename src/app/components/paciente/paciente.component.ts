@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Paciente } from '../../model/Paciente';
+import { MatTableDataSource } from '@angular/material/table';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-pacientes',
@@ -8,21 +10,24 @@ import { Paciente } from '../../model/Paciente';
 })
 export class PacienteComponent implements OnInit {
 
-  pacientes: Paciente[];
+  pacientes: MatTableDataSource<Paciente>;
   columnsToDisplay: string[] = ['nome', 'dataNascimento', 'editar', 'excluir'];
   
   constructor() { }
 
   ngOnInit(): void {
-    this.pacientes = [
-      { id: 1, nome: 'Thiago', dataNascimento: new Date(1995, 2, 15) },
-      { id: 2, nome: 'Caio', dataNascimento: new Date(1993, 4, 28) },
-      { id: 3, nome: 'Natália', dataNascimento: new Date(1997, 0, 15) }
-    ]
+    this.pacientes = new MatTableDataSource(PACIENTES_DATA);
+  }
+  
+  addPaciente(paciente: Paciente) {
+    paciente.id = PACIENTES_DATA.length + 1;
+    PACIENTES_DATA.push(paciente);
+    this.pacientes = new MatTableDataSource(PACIENTES_DATA);
   }
 
   deletePaciente(paciente: Paciente) {
-    this.pacientes = this.pacientes.filter(p => p.id !== paciente.id);
+    PACIENTES_DATA = PACIENTES_DATA.filter(p => p.id !== paciente.id);
+    this.pacientes = new MatTableDataSource(PACIENTES_DATA)
   }
 
   botaoExcluirClicado(paciente: Paciente) {
@@ -38,3 +43,9 @@ export class PacienteComponent implements OnInit {
   }
 
 }
+
+let PACIENTES_DATA = [
+  { id: 1, nome: 'Thiago', dataNascimento: new Date(1995, 2, 15) },
+  { id: 2, nome: 'Caio', dataNascimento: new Date(1993, 4, 28) },
+  { id: 3, nome: 'Natália', dataNascimento: new Date(1997, 0, 15) }
+];

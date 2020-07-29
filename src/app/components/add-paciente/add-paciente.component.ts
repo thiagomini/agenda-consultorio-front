@@ -10,7 +10,7 @@ export class AddPacienteComponent implements OnInit {
   @Output() addPaciente: EventEmitter<any> = new EventEmitter();
 
   nome: string;
-  dataDeNascimento: Date;
+  dataNascimento: Date;
 
   constructor(public service: PacienteService) { }
 
@@ -20,8 +20,9 @@ export class AddPacienteComponent implements OnInit {
   onSubmit() {
     const paciente = {
       nome: this.nome,
-      dataDeNascimento: this.dataDeNascimento
+      dataNascimento: this.dataNascimento
     };
+    console.log(`submitted: nome: ${paciente.nome} nascimento: ${paciente.dataNascimento}`);
     this.addPaciente.emit(paciente);
   }
 

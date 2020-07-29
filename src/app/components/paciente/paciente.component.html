@@ -28,4 +28,4 @@
         (click)="onRowClicked(myRowData)"    
     ></tr>
 </table>
-<app-add-paciente></app-add-paciente>
+<app-add-paciente (addPaciente)="addPaciente($event)"></app-add-paciente>
