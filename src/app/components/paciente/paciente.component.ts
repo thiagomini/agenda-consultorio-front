@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Paciente } from '../../model/Paciente';
 import { MatTableDataSource } from '@angular/material/table';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { PacienteService } from 'src/app/services/paciente.service';
 
 @Component({
   selector: 'app-pacientes',
@@ -11,23 +12,32 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class PacienteComponent implements OnInit {
 
   pacientes: MatTableDataSource<Paciente>;
-  columnsToDisplay: string[] = ['nome', 'dataNascimento', 'editar', 'excluir'];
+  columnsToDisplay: string[] = ['nome', 'dataDeNascimento', 'editar', 'excluir'];
   
-  constructor() { }
+  constructor(private pacienteService: PacienteService) { }
 
   ngOnInit(): void {
-    this.pacientes = new MatTableDataSource(PACIENTES_DATA);
+   this.pacienteService.getPacientes().subscribe(pacientes => {
+      console.log(pacientes);
+      this.pacientes = new MatTableDataSource(pacientes);
+    })
   }
   
   addPaciente(paciente: Paciente) {
-    paciente.id = PACIENTES_DATA.length + 1;
-    PACIENTES_DATA.push(paciente);
-    this.pacientes = new MatTableDataSource(PACIENTES_DATA);
+    const allPacientes = this.pacientes.data;
+    this.pacienteService.addPaciente(paciente).subscribe(response => {
+      paciente.id = response.id;
+      allPacientes.push(paciente);
+      this.pacientes = new MatTableDataSource(allPacientes)
+    })
   }
 
   deletePaciente(paciente: Paciente) {
-    PACIENTES_DATA = PACIENTES_DATA.filter(p => p.id !== paciente.id);
-    this.pacientes = new MatTableDataSource(PACIENTES_DATA)
+    const allPacientes = this.pacientes.data.filter(p => p.id !== paciente.id);
+    this.pacientes = new MatTableDataSource(allPacientes)
+    this.pacienteService.deletePaciente(paciente).subscribe(response => {
+      console.log(response)
+    });
   }
 
   botaoExcluirClicado(paciente: Paciente) {
@@ -45,7 +55,5 @@ export class PacienteComponent implements OnInit {
 }
 
 let PACIENTES_DATA = [
-  { id: 1, nome: 'Thiago', dataNascimento: new Date(1995, 2, 15) },
-  { id: 2, nome: 'Caio', dataNascimento: new Date(1993, 4, 28) },
-  { id: 3, nome: 'Natália', dataNascimento: new Date(1997, 0, 15) }
+ 
 ];
