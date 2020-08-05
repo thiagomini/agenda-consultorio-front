@@ -1,0 +1,29 @@
+<form [formGroup]="consultaService.form" class="normal-form" (ngSubmit)="onSubmit()">
+    <div class="form-inputs">
+        <input type="hidden" formControlName="$key">
+        <mat-form-field>
+            <mat-select formControlName="paciente" placeholder="Paciente*" [(ngModel)]="paciente">
+                <mat-option>None</mat-option>
+                <ng-container *ngFor="let paciente of pacientes">
+                    <mat-option value="{{paciente.id}}">{{ paciente.nome }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="horaInicio" matInput [matDatepicker]="picker" placeholder="Hora Início*" [(ngModel)]="horaConsultaInicio">
+            <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
+            <mat-error>Esse campo é obrigatório.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="horaFim" matInput [matDatepicker]="picker2" placeholder="Hora Fim*" [(ngModel)]="horaConsultaFim">
+            <mat-datepicker-toggle matSuffix [for]="picker2" ></mat-datepicker-toggle>
+            <mat-datepicker #picker2 ></mat-datepicker>
+            <mat-error>Esse campo é obrigatório.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="observacao" matInput placeholder="Observação" [(ngModel)]="observacao">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="consultaService.form.invalid">Adicionar</button>
+    </div>
+</form>

@@ -5,4 +5,5 @@ export class Consulta {
     horaFim: Date;
     observacao: string;
     paciente: Paciente;
+    personId: number;
 }

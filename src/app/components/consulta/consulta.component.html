@@ -1,0 +1,38 @@
+<table mat-table [dataSource]="consultas">
+    <ng-container matColumnDef="horaInicio">
+        <th mat-header-cell *matHeaderCellDef> Hora Início </th>
+        <td mat-cell *matCellDef="let consulta">{{ consulta.horaConsultaInicio | date:'dd/MM/yyyy HH:mm' }}</td>
+    </ng-container>    
+    <ng-container matColumnDef="horaFim">
+        <th mat-header-cell *matHeaderCellDef> Hora Fim </th>
+        <td mat-cell *matCellDef="let consulta">{{ consulta.horaConsultaFim | date:'dd/MM/yyyy HH:mm' }}</td>
+    </ng-container>  
+    <ng-container matColumnDef="paciente">
+        <th mat-header-cell *matHeaderCellDef> Paciente </th>
+        <td mat-cell *matCellDef="let consulta">{{ consulta.paciente }}</td>
+    </ng-container>  
+    <ng-container matColumnDef="observacao">
+        <th mat-header-cell *matHeaderCellDef> Observação </th>
+        <td mat-cell *matCellDef="let consulta">{{ consulta.observacao }}</td>
+    </ng-container>  
+    <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let consulta"
+        (click)="botaoEditarClicado(consulta)"
+        ><button mat-icon-button><mat-icon arial-label="Example">create</mat-icon></button></td>
+    </ng-container>  
+
+    <ng-container matColumnDef="excluir">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let consulta"
+            (click)="botaoExcluirClicado(consulta)"
+        ><button mat-icon-button><mat-icon arial-label="Example">delete</mat-icon></button></td>
+    </ng-container> 
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"
+        (click)="onRowClicked(myRowData)"    
+    ></tr>
+</table>
+<app-add-consulta (addConsulta)="addConsulta($event)"></app-add-consulta>

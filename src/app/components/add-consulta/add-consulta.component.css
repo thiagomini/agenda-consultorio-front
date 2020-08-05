@@ -1,0 +1,18 @@
+.form-inputs {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.form-inputs mat-form-field {
+    width: 30%;
+    margin-left: 15px;
+}
+
+.form-inputs button {
+    width: 36%;
+    margin-left: 15px;
+}
+
+th {
+    text-align: center;
+}
