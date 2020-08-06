@@ -10,15 +10,23 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <input formControlName="horaInicio" matInput [matDatepicker]="picker" placeholder="Hora Início*" [(ngModel)]="horaConsultaInicio">
-            <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
-            <mat-datepicker #picker ></mat-datepicker>
+            <input matInput formControlName="horaInicio" [ngxMatDatetimePicker]="picker" placeholder="Hora Início*" [(ngModel)]="horaConsultaInicio"
+            [disabled]=false>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds" [stepHour]="stepHour"
+              [stepMinute]=5 [stepSecond]=1 [touchUi]=false
+              [enableMeridian]=false [disableMinute]=false [hideTime]=false>
+            </ngx-mat-datetime-picker>
             <mat-error>Esse campo é obrigatório.</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input formControlName="horaFim" matInput [matDatepicker]="picker2" placeholder="Hora Fim*" [(ngModel)]="horaConsultaFim">
-            <mat-datepicker-toggle matSuffix [for]="picker2" ></mat-datepicker-toggle>
-            <mat-datepicker #picker2 ></mat-datepicker>
+            <input matInput formControlName="horaFim" [ngxMatDatetimePicker]="pickerHoraFim" placeholder="Hora Fim*" [(ngModel)]="horaConsultaFim"
+            [disabled]=false>
+            <mat-datepicker-toggle matSuffix [for]="pickerHoraFim"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #pickerHoraFim [showSpinners]="showSpinners" [showSeconds]="showSeconds" [stepHour]="stepHour"
+              [stepMinute]=5 [stepSecond]=1 [touchUi]=false
+              [enableMeridian]=false [disableMinute]=false [hideTime]=false>
+            </ngx-mat-datetime-picker>
             <mat-error>Esse campo é obrigatório.</mat-error>
         </mat-form-field>
         <mat-form-field>

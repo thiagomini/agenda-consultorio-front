@@ -1,8 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Paciente } from 'src/app/model/Paciente';
 import { PacienteService } from '../../services/paciente.service';
 import { ConsultaService } from '../../services/consulta.service';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_LOCALE, ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-add-consulta',
@@ -14,6 +14,17 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 })
 export class AddConsultaComponent implements OnInit {
   @Output() addConsulta: EventEmitter<any> = new EventEmitter();
+
+  @Input() showSpinners: boolean = true;
+  @Input() showSeconds: boolean = false;
+  @Input() stepHour: number = 1;
+  @Input() stepMinute: number = 5;
+  @Input() touchUi: boolean = false;
+  @Input() color: ThemePalette = undefined;
+  @Input() enableMeridian: boolean = false;
+  @Input() disableMinute: boolean = false;
+  @Input() hideTime: boolean = false;
+  
 
   horaConsultaInicio: Date;
   horaConsultaFim: Date;

@@ -12,6 +12,7 @@ import { PacienteService } from './services/paciente.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ConsultaComponent } from './components/consulta/consulta.component';
 import { AddConsultaComponent } from './components/add-consulta/add-consulta.component'
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,10 @@ import { AddConsultaComponent } from './components/add-consulta/add-consulta.com
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   providers: [PacienteService],
   bootstrap: [AppComponent]

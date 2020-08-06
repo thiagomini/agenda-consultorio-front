@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'; 
 import { MatTableModule } from '@angular/material/table'; 
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -42,7 +43,7 @@ import { MatTableModule } from '@angular/material/table';
     MatNativeDateModule,
     MatButtonModule,
     MatTableModule,
-    MatIconModule 
+    MatIconModule
   ]
 })
 export class MaterialModule { }
