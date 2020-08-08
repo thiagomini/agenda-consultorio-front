@@ -10,7 +10,7 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <input matInput formControlName="horaInicio" [ngxMatDatetimePicker]="picker" placeholder="Hora Início*" [(ngModel)]="horaConsultaInicio"
+            <input matInput formControlName="horaConsultaInicio" [ngxMatDatetimePicker]="picker" placeholder="Hora Início*"  [(ngModel)]="horaConsultaInicio"
             [disabled]=false>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds" [stepHour]="stepHour"
@@ -18,9 +18,12 @@
               [enableMeridian]=false [disableMinute]=false [hideTime]=false>
             </ngx-mat-datetime-picker>
             <mat-error>Esse campo é obrigatório.</mat-error>
+            <mat-error *ngIf="consultaService.form.get('horaConsultaInicio').errors?.serverError">
+                {{ consultaService.form.get('horaConsultaInicio').errors?.serverError }}
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input matInput formControlName="horaFim" [ngxMatDatetimePicker]="pickerHoraFim" placeholder="Hora Fim*" [(ngModel)]="horaConsultaFim"
+            <input matInput formControlName="horaConsultaFim" [ngxMatDatetimePicker]="pickerHoraFim" placeholder="Hora Fim*"  [(ngModel)]="horaConsultaFim"
             [disabled]=false>
             <mat-datepicker-toggle matSuffix [for]="pickerHoraFim"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #pickerHoraFim [showSpinners]="showSpinners" [showSeconds]="showSeconds" [stepHour]="stepHour"
@@ -28,9 +31,12 @@
               [enableMeridian]=false [disableMinute]=false [hideTime]=false>
             </ngx-mat-datetime-picker>
             <mat-error>Esse campo é obrigatório.</mat-error>
+            <mat-error *ngIf="consultaService.form.get('horaConsultaFim').errors?.serverError">
+                {{ consultaService.form.get('horaConsultaFim').errors?.serverError }}
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input formControlName="observacao" matInput placeholder="Observação" [(ngModel)]="observacao">
+            <input formControlName="observacao" matInput placeholder="Observação"  [(ngModel)]="observacao">
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit" [disabled]="consultaService.form.invalid">Adicionar</button>
     </div>

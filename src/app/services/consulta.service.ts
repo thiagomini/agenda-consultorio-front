@@ -19,8 +19,8 @@ export class ConsultaService {
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
-    horaInicio: new FormControl('', Validators.required),
-    horaFim: new FormControl('', Validators.required),
+    horaConsultaInicio: new FormControl('', Validators.required),
+    horaConsultaFim: new FormControl('', Validators.required),
     paciente: new FormControl(0),
     observacao: new FormControl('')
   });

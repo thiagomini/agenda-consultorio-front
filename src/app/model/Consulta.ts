@@ -4,6 +4,6 @@ export class Consulta {
     horaInicio: Date;
     horaFim: Date;
     observacao: string;
-    paciente: Paciente;
+    person: Paciente;
     personId: number;
 }
