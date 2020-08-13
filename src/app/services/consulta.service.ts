@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Consulta } from '../model/Consulta';
 
 const httpOptions = {
@@ -37,6 +37,7 @@ export class ConsultaService {
   }
 
   addConsulta(consulta: Consulta): Observable<Consulta> {
-    return this.http.post<Consulta>(this.consultasUrl, consulta, httpOptions);
+    return this.http.post<Consulta>(this.consultasUrl, consulta, httpOptions)
   }
+
 }

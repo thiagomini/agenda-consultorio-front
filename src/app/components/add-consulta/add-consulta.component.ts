@@ -18,12 +18,14 @@ export class AddConsultaComponent implements OnInit {
   @Input() showSpinners: boolean = true;
   @Input() showSeconds: boolean = false;
   @Input() stepHour: number = 1;
-  @Input() stepMinute: number = 5;
+  @Input() stepMinute: number = 1;
+  @Input() stepSecond: number = 5;
   @Input() touchUi: boolean = false;
   @Input() color: ThemePalette = undefined;
   @Input() enableMeridian: boolean = false;
   @Input() disableMinute: boolean = false;
   @Input() hideTime: boolean = false;
+  @Input() defaultTime: Array<any> = [0, 0, 0]
   
 
   horaConsultaInicio: Date;

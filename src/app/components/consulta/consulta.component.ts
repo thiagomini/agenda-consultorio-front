@@ -31,6 +31,9 @@ export class ConsultaComponent implements OnInit {
         consulta.person = paciente;
         allConsultas.push(consulta);
         this.consultas = new MatTableDataSource(allConsultas)
+      }, (err) => {
+        console.log('Erro!')
+        alert('Erro ao criar uma consulta!');
       })
     })
   }

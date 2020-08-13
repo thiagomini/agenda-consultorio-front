@@ -10,12 +10,23 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <input matInput formControlName="horaConsultaInicio" [ngxMatDatetimePicker]="picker" placeholder="Hora Início*"  [(ngModel)]="horaConsultaInicio"
+            <input matInput formControlName="horaConsultaInicio" 
+            [ngxMatDatetimePicker]="picker"
+            placeholder="Hora Início*"  
+            [(ngModel)]="horaConsultaInicio"
             [disabled]=false>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds" [stepHour]="stepHour"
-              [stepMinute]=5 [stepSecond]=1 [touchUi]=false
-              [enableMeridian]=false [disableMinute]=false [hideTime]=false>
+            <ngx-mat-datetime-picker #picker
+             [showSpinners]="showSpinners" 
+             [showSeconds]="showSeconds"
+             [stepHour]="stepHour"
+             [stepMinute]=1 
+             [stepSecond]=1 
+             [touchUi]="touchUi"
+             [enableMeridian]="enableMeridian" 
+             [disableMinute]="disableMinute" 
+             [hideTime]="hideTime"
+             [defaultTime]="defaultTime">
             </ngx-mat-datetime-picker>
             <mat-error>Esse campo é obrigatório.</mat-error>
             <mat-error *ngIf="consultaService.form.get('horaConsultaInicio').errors?.serverError">
@@ -26,9 +37,18 @@
             <input matInput formControlName="horaConsultaFim" [ngxMatDatetimePicker]="pickerHoraFim" placeholder="Hora Fim*"  [(ngModel)]="horaConsultaFim"
             [disabled]=false>
             <mat-datepicker-toggle matSuffix [for]="pickerHoraFim"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #pickerHoraFim [showSpinners]="showSpinners" [showSeconds]="showSeconds" [stepHour]="stepHour"
-              [stepMinute]=5 [stepSecond]=1 [touchUi]=false
-              [enableMeridian]=false [disableMinute]=false [hideTime]=false>
+            <ngx-mat-datetime-picker #pickerHoraFim
+            [showSpinners]="showSpinners"
+            [showSeconds]="showSeconds"
+            [stepHour]="stepHour"
+            [stepMinute]="stepMinute"
+            [stepSecond]="stepSecond"
+            [touchUi]="touchUi"
+            [enableMeridian]="enableMeridian"
+            [disableMinute]="disableMinute"
+            [hideTime]="hideTime"
+            [defaultTime]="defaultTime"
+            >
             </ngx-mat-datetime-picker>
             <mat-error>Esse campo é obrigatório.</mat-error>
             <mat-error *ngIf="consultaService.form.get('horaConsultaFim').errors?.serverError">
