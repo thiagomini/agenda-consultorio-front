@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Consulta } from '../../model/Consulta';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConsultaService } from 'src/app/services/consulta.service';
 import { PacienteService } from 'src/app/services/paciente.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from "@angular/material/dialog";
+import {EditConsultaComponent } from '../edit-consulta/edit-consulta.component';
 
 @Component({
   selector: 'app-consulta',
@@ -14,8 +19,8 @@ export class ConsultaComponent implements OnInit {
 
   consultas: MatTableDataSource<Consulta>;
   columnsToDisplay: string[] = ['horaInicio', 'horaFim', 'paciente', 'observacao', 'editar', 'excluir'];
-
-  constructor(private consultaService: ConsultaService, private pacienteService: PacienteService) { }
+  selectedConsulta: Consulta;
+  constructor(private consultaService: ConsultaService, private pacienteService: PacienteService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.consultaService.getConsultas().subscribe(
@@ -52,11 +57,23 @@ export class ConsultaComponent implements OnInit {
 
   botaoEditarClicado(consulta: Consulta) {
     console.log(`Consulta editado: ${consulta}`);
+    this.selectedConsulta = consulta;
+    this.openDialog()
   }
 
   onRowClicked(row) {
     console.log(row);
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditConsultaComponent, {
+      width: "500px",
+      data: this.selectedConsulta
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+    });
+  }
 
 }

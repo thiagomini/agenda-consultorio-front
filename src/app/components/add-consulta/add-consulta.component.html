@@ -3,7 +3,6 @@
         <input type="hidden" formControlName="$key">
         <mat-form-field>
             <mat-select formControlName="paciente" placeholder="Paciente*" [(ngModel)]="paciente">
-                <mat-option>None</mat-option>
                 <ng-container *ngFor="let paciente of pacientes">
                     <mat-option value="{{paciente.id}}">{{ paciente.nome }}</mat-option>
                 </ng-container>

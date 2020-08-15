@@ -15,6 +15,7 @@ import { AddConsultaComponent } from './components/add-consulta/add-consulta.com
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 import { HttpErrorInterceptor } from './error-handling/HttpErrorInterceptor';
 import { ErrorDialogComponent } from './error-handling/error-dialog/error-dialog.component';
+import { EditConsultaComponent } from './components/edit-consulta/edit-consulta.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ErrorDialogComponent } from './error-handling/error-dialog/error-dialog
     AddPacienteComponent,
     ConsultaComponent,
     AddConsultaComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    EditConsultaComponent
   ],
   imports: [
     BrowserModule,
