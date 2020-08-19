@@ -1,8 +1,8 @@
 import { Paciente } from './Paciente';
 export class Consulta {
     id: number;
-    horaInicio: Date;
-    horaFim: Date;
+    horaConsultaInicio: Date;
+    horaConsultaFim: Date;
     observacao: string;
     person: Paciente;
     personId: number;

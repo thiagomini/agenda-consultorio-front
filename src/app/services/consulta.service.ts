@@ -36,6 +36,11 @@ export class ConsultaService {
     return this.http.delete<Consulta>(url, httpOptions);
   }
 
+  editConsulta(consulta: Consulta): Observable<Consulta> {
+    const url = `{this.consultasUrl}/${consulta.id}`;
+    return this.http.put<Consulta>(url, httpOptions);
+  }
+
   addConsulta(consulta: Consulta): Observable<Consulta> {
     return this.http.post<Consulta>(this.consultasUrl, consulta, httpOptions)
   }

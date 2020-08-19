@@ -18,7 +18,7 @@ import {EditConsultaComponent } from '../edit-consulta/edit-consulta.component';
 export class ConsultaComponent implements OnInit {
 
   consultas: MatTableDataSource<Consulta>;
-  columnsToDisplay: string[] = ['horaInicio', 'horaFim', 'paciente', 'observacao', 'editar', 'excluir'];
+  columnsToDisplay: string[] = ['horaConsultaInicio', 'horaConsultaFim', 'paciente', 'observacao', 'editar', 'excluir'];
   selectedConsulta: Consulta;
   constructor(private consultaService: ConsultaService, private pacienteService: PacienteService, public dialog: MatDialog) { }
 
@@ -56,7 +56,6 @@ export class ConsultaComponent implements OnInit {
   }
 
   botaoEditarClicado(consulta: Consulta) {
-    console.log(`Consulta editado: ${consulta}`);
     this.selectedConsulta = consulta;
     this.openDialog()
   }
@@ -66,14 +65,21 @@ export class ConsultaComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(EditConsultaComponent, {
-      width: "500px",
-      data: this.selectedConsulta
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");
-    });
+    this.pacienteService.getPacientes().subscribe(pacientes => {
+      const dialogRef = this.dialog.open(EditConsultaComponent, {
+        width: "750px",
+        data: {
+          consulta: this.selectedConsulta,
+          pacientes
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log("The dialog was closed");
+        this.selectedConsulta = null;
+      });
+    })
+    
   }
 
 }

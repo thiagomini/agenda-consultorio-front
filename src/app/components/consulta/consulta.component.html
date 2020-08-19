@@ -1,9 +1,9 @@
 <table mat-table [dataSource]="consultas">
-    <ng-container matColumnDef="horaInicio">
+    <ng-container matColumnDef="horaConsultaInicio">
         <th mat-header-cell *matHeaderCellDef> Hora Início </th>
         <td mat-cell *matCellDef="let consulta">{{ consulta.horaConsultaInicio | date:'dd/MM/yyyy HH:mm' }}</td>
     </ng-container>    
-    <ng-container matColumnDef="horaFim">
+    <ng-container matColumnDef="horaConsultaFim">
         <th mat-header-cell *matHeaderCellDef> Hora Fim </th>
         <td mat-cell *matCellDef="let consulta">{{ consulta.horaConsultaFim | date:'dd/MM/yyyy HH:mm' }}</td>
     </ng-container>  
