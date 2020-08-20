@@ -1,8 +1,7 @@
-<form [formGroup]="consultaService.form" class="normal-form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
     <div class="form-inputs">
-        <input type="hidden" formControlName="$key">
         <mat-form-field>
-            <mat-select formControlName="paciente" placeholder="Paciente*" [(ngModel)]="paciente">
+            <mat-select formControlName="id" placeholder="Paciente*" [formControl]="form.get('id')">
                 <ng-container *ngFor="let paciente of pacientes">
                     <mat-option value="{{paciente.id}}">{{ paciente.nome }}</mat-option>
                 </ng-container>
@@ -12,7 +11,7 @@
             <input matInput formControlName="horaConsultaInicio" 
             [ngxMatDatetimePicker]="picker"
             placeholder="Hora Início*"  
-            [(ngModel)]="horaConsultaInicio"
+            [formControl]="form.get('horaConsultaInicio')"
             [disabled]=false>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #picker
@@ -28,12 +27,15 @@
              [defaultTime]="defaultTime">
             </ngx-mat-datetime-picker>
             <mat-error>Esse campo é obrigatório.</mat-error>
-            <mat-error *ngIf="consultaService.form.get('horaConsultaInicio').errors?.serverError">
-                {{ consultaService.form.get('horaConsultaInicio').errors?.serverError }}
+            <mat-error *ngIf="form.get('horaConsultaInicio').errors?.serverError">
+                {{ form.get('horaConsultaInicio').errors?.serverError }}
             </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input matInput formControlName="horaConsultaFim" [ngxMatDatetimePicker]="pickerHoraFim" placeholder="Hora Fim*"  [(ngModel)]="horaConsultaFim"
+            <input matInput formControlName="horaConsultaFim"
+            [ngxMatDatetimePicker]="pickerHoraFim"
+            placeholder="Hora Fim*"
+            [formControl]="form.get('horaConsultaFim')"
             [disabled]=false>
             <mat-datepicker-toggle matSuffix [for]="pickerHoraFim"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #pickerHoraFim
@@ -50,13 +52,13 @@
             >
             </ngx-mat-datetime-picker>
             <mat-error>Esse campo é obrigatório.</mat-error>
-            <mat-error *ngIf="consultaService.form.get('horaConsultaFim').errors?.serverError">
-                {{ consultaService.form.get('horaConsultaFim').errors?.serverError }}
+            <mat-error *ngIf="form.get('horaConsultaFim').errors?.serverError">
+                {{ form.get('horaConsultaFim').errors?.serverError }}
             </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input formControlName="observacao" matInput placeholder="Observação"  [(ngModel)]="observacao">
+            <input formControlName="observacao" matInput placeholder="Observação"  [formControl]="form.get('observacao')">
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" [disabled]="consultaService.form.invalid">Adicionar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Adicionar</button>
     </div>
 </form>

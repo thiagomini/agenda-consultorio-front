@@ -3,6 +3,7 @@ import { Paciente } from 'src/app/model/Paciente';
 import { PacienteService } from '../../services/paciente.service';
 import { ConsultaService } from '../../services/consulta.service';
 import { MAT_DATE_LOCALE, ThemePalette } from '@angular/material/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-consulta',
@@ -27,14 +28,18 @@ export class AddConsultaComponent implements OnInit {
   @Input() hideTime: boolean = false;
   @Input() defaultTime: Array<any> = [0, 0, 0]
   
-
-  horaConsultaInicio: Date;
-  horaConsultaFim: Date;
-  observacao: string;
-  paciente: Paciente;
   pacientes: Paciente[];
 
   constructor(public pacienteService: PacienteService, public consultaService: ConsultaService) { }
+
+  form: FormGroup = new FormGroup({
+    id: new FormControl(null),
+    horaConsultaInicio: new FormControl('', Validators.required),
+    horaConsultaFim: new FormControl('', Validators.required),
+    paciente: new FormControl(0),
+    observacao: new FormControl('')
+  });
+
 
   ngOnInit(): void {
     this.pacienteService.getPacientes().subscribe(pacientes => {
@@ -44,12 +49,13 @@ export class AddConsultaComponent implements OnInit {
 
   onSubmit() {
     const consulta = {
-      horaConsultaInicio: this.horaConsultaInicio,
-      horaConsultaFim: this.horaConsultaFim,
-      personId: this.paciente,
-      observacao: this.observacao
+      horaConsultaInicio: this.form.get('horaConsultaInicio').value,
+      horaConsultaFim: this.form.get('horaConsultaFim').value,
+      personId: this.form.get('id').value,
+      observacao: this.form.get('observacao').value
     };
     this.addConsulta.emit(consulta);
+    this.form.reset();
   }
 
 }
