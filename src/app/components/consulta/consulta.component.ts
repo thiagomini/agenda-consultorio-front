@@ -5,8 +5,6 @@ import { ConsultaService } from 'src/app/services/consulta.service';
 import { PacienteService } from 'src/app/services/paciente.service';
 import {
   MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA
 } from "@angular/material/dialog";
 import {EditConsultaComponent } from '../edit-consulta/edit-consulta.component';
 
@@ -23,11 +21,16 @@ export class ConsultaComponent implements OnInit {
   constructor(private consultaService: ConsultaService, private pacienteService: PacienteService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.reloadConsultas();
+  }
+
+  reloadConsultas(): void {
     this.consultaService.getConsultas().subscribe(
       consultas => {
       this.consultas = new MatTableDataSource(consultas);
     })
   }
+
   addConsulta(consulta: Consulta) {
     const allConsultas = this.consultas.data;
     this.consultaService.addConsulta(consulta).subscribe(response => {
@@ -77,6 +80,7 @@ export class ConsultaComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         console.log("The dialog was closed");
         this.selectedConsulta = null;
+        this.reloadConsultas()
       });
     })
     

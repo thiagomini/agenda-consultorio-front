@@ -1,3 +1,4 @@
+<h1>Editar Paciente</h1>
 <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
     <div class="form-inputs">
         <input type="hidden" formControlName="id">
@@ -14,3 +15,4 @@
         <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Adicionar</button>
     </div>
 </form>
+<button mat-button (click)="onNoClick()">Fechar</button>

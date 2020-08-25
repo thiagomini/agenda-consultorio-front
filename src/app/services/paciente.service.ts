@@ -17,21 +17,7 @@ export class PacienteService {
 
   pacientesUrl: string = 'https://localhost:5001/api/people'
 
-  form: FormGroup = new FormGroup({
-    $key: new FormControl(null),
-    nome: new FormControl('', Validators.required),
-    dataDeNascimento: new FormControl('', Validators.required),
-  });
-
   constructor(private http: HttpClient) { }
-
-  initializeFormGroup() {
-    this.form.setValue({
-      $key: null,
-      nome: '',
-      dataDeNascimento: ''
-    });
-  }
 
   getPacientes(): Observable<Paciente[]> {
     return this.http.get<Paciente[]>(this.pacientesUrl, httpOptions);
@@ -48,5 +34,10 @@ export class PacienteService {
 
   addPaciente(paciente: Paciente): Observable<Paciente> {
     return this.http.post<Paciente>(this.pacientesUrl, paciente, httpOptions);
+  }
+
+  editPaciente(paciente: Paciente): Observable<Paciente> {
+    const url = `${this.pacientesUrl}/${paciente.id}`;
+    return this.http.put<Paciente>(url, paciente, httpOptions);
   }
 }

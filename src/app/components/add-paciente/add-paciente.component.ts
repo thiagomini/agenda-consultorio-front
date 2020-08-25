@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { PacienteService } from '../../services/paciente.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-paciente',
@@ -13,8 +14,11 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 export class AddPacienteComponent implements OnInit {
   @Output() addPaciente: EventEmitter<any> = new EventEmitter();
 
-  nome: string;
-  dataDeNascimento: Date;
+  form: FormGroup = new FormGroup({
+    id: new FormControl(null),
+    nome: new FormControl('', Validators.required),
+    dataDeNascimento: new FormControl('', Validators.required),
+  });
 
   constructor(public service: PacienteService) { }
 
@@ -23,11 +27,19 @@ export class AddPacienteComponent implements OnInit {
 
   onSubmit() {
     const paciente = {
-      nome: this.nome,
-      dataDeNascimento: this.dataDeNascimento
+      nome: this.form.get('nome').value,
+      dataDeNascimento: this.form.get('dataDeNascimento').value
     };
-    console.log(`submitted: nome: ${paciente.nome} nascimento: ${paciente.dataDeNascimento}`);
     this.addPaciente.emit(paciente);
+    this.initializeFormGroup();
+  }
+
+  initializeFormGroup() {
+    this.form.setValue({
+      id: null,
+      nome: '',
+      dataDeNascimento: ''
+    });
   }
 
 

@@ -16,6 +16,8 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateMod
 import { HttpErrorInterceptor } from './error-handling/HttpErrorInterceptor';
 import { ErrorDialogComponent } from './error-handling/error-dialog/error-dialog.component';
 import { EditConsultaComponent } from './components/edit-consulta/edit-consulta.component';
+import { EditPacienteComponent } from './components/edit-paciente/edit-paciente.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { EditConsultaComponent } from './components/edit-consulta/edit-consulta.
     ConsultaComponent,
     AddConsultaComponent,
     ErrorDialogComponent,
-    EditConsultaComponent
+    EditConsultaComponent,
+    EditPacienteComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

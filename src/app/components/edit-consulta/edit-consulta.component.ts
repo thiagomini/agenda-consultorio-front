@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Consulta } from 'src/app/model/Consulta';
 import { Paciente } from 'src/app/model/Paciente';
 import { ThemePalette } from '@angular/material/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConsultaService } from 'src/app/services/consulta.service';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-edit-consulta',
@@ -37,11 +38,11 @@ export class EditConsultaComponent implements OnInit {
   
   constructor(
     private consultaService: ConsultaService,
+    public confirmDialog: MatDialog,
     public dialogRef: MatDialogRef<EditConsultaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { consulta: Consulta, pacientes: Array<Paciente> }
   ) {}
   ngOnInit(): void {
-    console.log('oi')
     this.initForm();
   }
 
@@ -58,20 +59,35 @@ export class EditConsultaComponent implements OnInit {
       observacao: this.form.get('observacao').value,
       person: null
     };
-    console.log(consulta);
     this.consultaService.editConsulta(consulta).subscribe(consulta => {
-      alert('Consulta editada com sucesso!');
-      this.dialogRef.close();;
+      this.openDialog();
+      this.dialogRef.close();
     });
     
   }
 
   initForm(): void {
-    this.form.get('id').setValue(this.data.consulta.id);
-    this.form.get('horaConsultaInicio').setValue(this.data.consulta.horaConsultaInicio);
-    this.form.get('horaConsultaFim').setValue(this.data.consulta.horaConsultaFim);
-    this.form.get('observacao').setValue(this.data.consulta.observacao);
-    this.form.get('paciente').setValue(this.data.consulta.person);
+    this.form.setValue({
+      id: this.data.consulta.id,
+      horaConsultaInicio: this.data.consulta.horaConsultaInicio,
+      horaConsultaFim: this.data.consulta.horaConsultaFim,
+      observacao: this.data.consulta.observacao,
+      paciente: this.data.consulta.person
+    });
   }
-}
 
+  openDialog() {
+    const dialogRef = this.confirmDialog.open(ConfirmationDialogComponent, {
+      width: '330px',
+      data: {
+        title: 'Consulta editada com sucesso!'
+      }
+
+    }) 
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+}

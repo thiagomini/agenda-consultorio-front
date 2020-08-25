@@ -1,13 +1,12 @@
 <h1>Editar consulta</h1>
 <form [formGroup]="form" class="normal-form" (ngSubmit)="onSubmit()">
     <div class="form-inputs">
-        <input type="hidden" formControlName="$key">
+        <input type="hidden" formControlName="id">
         <p>Selecionado: {{ data.consulta.person.nome }}</p>
         <mat-form-field>
             <input matInput formControlName="horaConsultaInicio" 
             [ngxMatDatetimePicker]="picker"
             placeholder="Hora Início*"  
-            [formControl]="form.get('horaConsultaInicio')"
             [disabled]=false>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #picker
@@ -31,7 +30,6 @@
             <input matInput formControlName="horaConsultaFim"
             [ngxMatDatetimePicker]="pickerHoraFim"
             placeholder="Hora Fim*" 
-            [formControl]="form.get('horaConsultaFim')"
             [disabled]=false>
             <mat-datepicker-toggle matSuffix [for]="pickerHoraFim"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #pickerHoraFim
@@ -53,7 +51,7 @@
             </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input formControlName="observacao" matInput placeholder="Observação" [formControl]="form.get('observacao')">
+            <input formControlName="observacao" matInput placeholder="Observação">
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Adicionar</button>
     </div>
