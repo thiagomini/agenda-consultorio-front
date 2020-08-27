@@ -1,18 +1,14 @@
-.form-inputs {
-    width: 100%;
-    margin-top: 10px;
-}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 10px;
+  }
 
-.form-inputs mat-form-field {
-    width: 30%;
-    margin-left: 15px;
-}
+  .grid-item {
+      width: 100%;
+      padding: 20px;
+  }
 
-.form-inputs button {
-    width: 36%;
-    margin-left: 15px;
-}
-
-th {
-    text-align: center;
-}
+  .mat-form-field {
+      width: 90%;
+  }
